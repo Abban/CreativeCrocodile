@@ -7,16 +7,16 @@ class CreativecrocodileCommand(sublime_plugin.TextCommand):
 
     @classmethod
     def get_adjective(self):
-        with open(sublime.packages_path() + "/CreativeCrocodile/adjectives.json") as data_file:    
-            data = json.load(data_file)
-
+        data_file = sublime.load_resource("Packages/CreativeCrocodile/adjectives.json")
+        data = sublime.decode_value(data_file)
+        
         random.shuffle(data)
         return data[0]
 
     @classmethod
     def get_animal(self, adjective):
-        with open(sublime.packages_path() + "/CreativeCrocodile/animals.json") as data_file:    
-            data = json.load(data_file)
+        data_file = sublime.load_resource("Packages/CreativeCrocodile/animals.json")
+        data = sublime.decode_value(data_file)
 
         letter = adjective[:1].lower()
         matchedAnimals = data[letter]
